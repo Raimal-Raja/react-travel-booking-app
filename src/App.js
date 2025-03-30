@@ -6,7 +6,7 @@ function App() {
     <>
     <div classNameName="App">
     <header classNameName="App-header">
-      <img src={logo} classNameName="App-logo" alt="logo" />
+      {/* <img src={logo} classNameName="App-logo" alt="logo" /> */}
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">Navbar</a>
