@@ -8,6 +8,7 @@ function App() {
   return (
     <>
     <Navbar/>
+    <TextForm heading = "Fill this form"/>
     <TextForm/>
     
   </>

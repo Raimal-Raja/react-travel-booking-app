@@ -1,19 +1,20 @@
 import React from 'react'
-export default function TextForom() {
+export default function TextForom(props) {
     return (
         <>
         <div>
+            <h1>{props.heading}</h1>
             <form className="row g-3 needs-validation" novalidate>
                 <div className="col-md-4">
                     <label for="validationCustom01" className="form-label">First name</label>
-                    <input type="text" className="form-control" id="validationCustom01" value="Mark" required />
+                    <input type="text" className="form-control" id="validationCustom01" required />
                     <div className="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div className="col-md-4">
                     <label for="validationCustom02" className="form-label">Last name</label>
-                    <input type="text" className="form-control" id="validationCustom02" value="Otto" required />
+                    <input type="text" className="form-control" id="validationCustom02" required />
                     <div className="valid-feedback">
                         Looks good!
                     </div>
