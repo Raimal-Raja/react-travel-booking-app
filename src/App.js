@@ -9,7 +9,7 @@ function App() {
     <>
     <Navbar/>
     <TextForm heading = "Fill this form"/>
-    <TextForm/>
+    {/* <TextForm/> */}
     
   </>
   );
