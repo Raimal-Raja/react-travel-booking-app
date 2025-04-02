@@ -28,19 +28,30 @@ This project aims to provide a seamless travel booking experience for users, all
 
 ### **My App (User Platform)**
 ✅ **User Authentication** – Sign up, log in, and manage user profiles.
+
 ✅ **Search & Filters** – Find destinations, hotels, and flights with advanced search options.
+
 ✅ **Booking System** – Book accommodations and manage reservations.
+
 ✅ **Payment Integration** – Secure checkout process.
+
 ✅ **Mobile-Friendly UI** – Fully responsive for mobile and desktop.
+
 ✅ **Google Maps Integration** – View destinations and locations.
+
 ✅ **Reviews & Ratings** – Users can leave feedback and ratings.
 
 ### **My React App (Admin Dashboard)**
 ✅ **Admin Authentication** – Secure access for administrators.
+
 ✅ **User Management** – View, edit, and manage user accounts.
+
 ✅ **Booking Management** – Approve, reject, or modify bookings.
+
 ✅ **Content Management** – Manage destinations, listings, and promotions.
+
 ✅ **Analytics Dashboard** – View real-time booking data and trends.
+
 ✅ **Role-Based Access Control** – Restrict access based on user roles.
 
 ## Technologies Used
