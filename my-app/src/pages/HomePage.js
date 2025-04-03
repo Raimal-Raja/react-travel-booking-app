@@ -15,10 +15,10 @@ const HomePage = () => {
   // State for carousel
   const [activeStep, setActiveStep] = useState(0);
   const carouselItems = [
-    {
-      image: "https://bykea.com/wp-content/uploads/2021/09/03-Bykea-Lower-Banner-SJ-Ride-e15839371395834.png",
-      caption: "Comfortable Rides Across Badin"
-    },
+    // {
+    //   image: "https://bykea.com/wp-content/uploads/2021/09/03-Bykea-Lower-Banner-SJ-Ride-e15839371395834.png",
+    //   caption: "Comfortable Rides Across Badin"
+    // },
     {
       image: "https://bykea.com/wp-content/uploads/2021/10/flywheel_bg.png",
       caption: "Professional Drivers at Your Service"
@@ -58,7 +58,7 @@ const HomePage = () => {
             <Button 
               variant="contained" 
               component={Link} 
-              to="/booking"
+              to="booking"
               sx={{ 
                 bgcolor: 'white', 
                 color: 'primary.main',
@@ -72,7 +72,7 @@ const HomePage = () => {
             <Button 
               variant="outlined" 
               component={Link} 
-              to="/become-rider"
+              to="become-rider"
               sx={{ 
                 color: 'white',
                 borderColor: 'white',
@@ -87,8 +87,8 @@ const HomePage = () => {
           </Box>
           
           {/* Centered Hero Image */}
-          <Box sx={{ maxWidth: '80%', mx: 'auto' }}>
-            <Box component="img" src="/images/BadinRideMod1.png" alt="Badin Rides" sx={{ width: '100%'}} />
+          <Box sx={{ maxWidth: '80%', mx: '500%' }}>
+            <Box component="img" src="/images/BadinRideMod1.png" alt="Badin Rides" sx={{ width: '100%',boxSizing:'50px'}} />
           </Box>
         </Container>
       </Box>
