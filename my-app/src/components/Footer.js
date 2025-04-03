@@ -25,9 +25,9 @@ const Footer = () => {
               Quick Links
             </Typography>
             <List>
-              <ListItem component={Link} to="/about" sx={{ textDecoration: 'none', color: 'white' }}>
-                <ListItemText primary="About Us" />
-              </ListItem>
+              {/* <ListItem component={Link} to="/about" sx={{ textDecoration: 'none', color: 'white' }}> */}
+                {/* <ListItemText primary="About Us" /> */}
+              {/* </ListItem> */}
               <ListItem component={Link} to="/services" sx={{ textDecoration: 'none', color: 'white' }}>
                 <ListItemText primary="Services" />
               </ListItem>
