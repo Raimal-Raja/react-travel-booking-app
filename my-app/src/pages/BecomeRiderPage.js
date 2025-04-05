@@ -1,274 +1,3 @@
-// import React, { useState } from 'react';
-// // import { useNavigate } from 'react-router-dom';
-// import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
-
-// import { Container, Box, Typography, TextField, Button, Grid, MenuItem, Paper, CircularProgress } from '@mui/material';
-// import { useFormik } from 'formik';
-// import * as Yup from 'yup';
-// import axios from 'axios';
-
-// const BecomeRiderPage = () => {
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-//   const [submitted, setSubmitted] = useState(false);
-//   const navigate = useNavigate();
-
-//   const vehicleTypes = [
-//     { value: 'bike', label: 'Bike' },
-//     { value: 'rickshaw', label: 'Auto Rickshaw' },
-//     { value: 'car', label: 'Car' }
-//   ];
-
-//   const validationSchema = Yup.object({
-//     name: Yup.string().required('Name is required'),
-//     phone: Yup.string()
-//       .matches(/^[0-9]{11}$/, 'Phone number must be 11 digits')
-//       .required('Phone number is required'),
-//     location: Yup.string().required('Location is required'),
-//     vehicleType: Yup.string().required('Vehicle type is required'),
-//     vehicleNumber: Yup.string().required('Vehicle number is required'),
-//     email: Yup.string().email('Enter a valid email').required('Email is required'),
-//     password: Yup.string()
-//       .min(8, 'Password should be of minimum 8 characters length')
-//       .required('Password is required'),
-//     confirmPassword: Yup.string()
-//       .oneOf([Yup.ref('password'), null], 'Passwords must match')
-//       .required('Confirm password is required')
-//   });
-
-//   const formik = useFormik({
-//     initialValues: {
-//       name: '',
-//       phone: '',
-//       location: '',
-//       vehicleType: '',
-//       vehicleNumber: '',
-//       email: '',
-//       password: '',
-//       confirmPassword: ''
-//     },
-//     validationSchema: validationSchema,
-//     onSubmit: async (values) => {
-//       setIsSubmitting(true);
-//       try {
-//         // In a real app, you would send this data to your backend
-//         // For demonstration purposes, we're simulating an API call
-//         await new Promise(resolve => setTimeout(resolve, 1500));
-        
-//         // Simulate storing data in localStorage (in a real app this would be handled by your backend)
-//         const riders = JSON.parse(localStorage.getItem('riders') || '[]');
-//         riders.push({
-//           id: Date.now(),
-//           name: values.name,
-//           phone: values.phone,
-//           location: values.location,
-//           vehicleType: values.vehicleType,
-//           vehicleNumber: values.vehicleNumber,
-//           email: values.email,
-//           password: values.password, // In a real app, never store passwords in plain text
-//           available: true
-//         });
-//         localStorage.setItem('riders', JSON.stringify(riders));
-        
-//         setSubmitted(true);
-//       } catch (error) {
-//         console.error('Error registering rider:', error);
-//       } finally {
-//         setIsSubmitting(false);
-//       }
-//     }
-//   });
-
-//   return (
-//     <Box
-//       sx={{
-//         pt: 12,
-//         pb: 6,
-//         backgroundImage: 'url(/images/rider-background.jpg)',
-//         backgroundSize: 'cover',
-//         backgroundPosition: 'center',
-//         minHeight: '100vh',
-//         display: 'flex',
-//         alignItems: 'center'
-//       }}
-//     >
-//       <Container maxWidth="md">
-//         <Paper 
-//           elevation={3} 
-//           sx={{ 
-//             p: 4, 
-//             backgroundColor: 'rgba(255, 255, 255, 0.85)',
-//             backdropFilter: 'blur(10px)'
-//           }}
-//           className="form-container"
-//         >
-//           {!submitted ? (
-//             <>
-//               <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ mb: 4 }}>
-//                 Become a Rider
-//               </Typography>
-//               <Typography variant="body1" gutterBottom align="center" sx={{ mb: 4 }}>
-//                 Join our team of professional riders and start earning today!
-//               </Typography>
-              
-//               <form onSubmit={formik.handleSubmit}>
-//                 <Grid container spacing={2}>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="name"
-//                       name="name"
-//                       label="Full Name"
-//                       value={formik.values.name}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.name && Boolean(formik.errors.name)}
-//                       helperText={formik.touched.name && formik.errors.name}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="phone"
-//                       name="phone"
-//                       label="Phone Number"
-//                       value={formik.values.phone}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.phone && Boolean(formik.errors.phone)}
-//                       helperText={formik.touched.phone && formik.errors.phone}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="location"
-//                       name="location"
-//                       label="Location/Area"
-//                       value={formik.values.location}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.location && Boolean(formik.errors.location)}
-//                       helperText={formik.touched.location && formik.errors.location}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="vehicleType"
-//                       name="vehicleType"
-//                       select
-//                       label="Vehicle Type"
-//                       value={formik.values.vehicleType}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.vehicleType && Boolean(formik.errors.vehicleType)}
-//                       helperText={formik.touched.vehicleType && formik.errors.vehicleType}
-//                     >
-//                       {vehicleTypes.map((option) => (
-//                         <MenuItem key={option.value} value={option.value}>
-//                           {option.label}
-//                         </MenuItem>
-//                       ))}
-//                     </TextField>
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="vehicleNumber"
-//                       name="vehicleNumber"
-//                       label="Vehicle Number"
-//                       value={formik.values.vehicleNumber}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.vehicleNumber && Boolean(formik.errors.vehicleNumber)}
-//                       helperText={formik.touched.vehicleNumber && formik.errors.vehicleNumber}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="email"
-//                       name="email"
-//                       label="Email"
-//                       value={formik.values.email}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.email && Boolean(formik.errors.email)}
-//                       helperText={formik.touched.email && formik.errors.email}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="password"
-//                       name="password"
-//                       label="Password"
-//                       type="password"
-//                       value={formik.values.password}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.password && Boolean(formik.errors.password)}
-//                       helperText={formik.touched.password && formik.errors.password}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sm={6}>
-//                     <TextField
-//                       fullWidth
-//                       id="confirmPassword"
-//                       name="confirmPassword"
-//                       label="Confirm Password"
-//                       type="password"
-//                       value={formik.values.confirmPassword}
-//                       onChange={formik.handleChange}
-//                       error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-//                       helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-//                     />
-//                   </Grid>
-//                   <Grid item xs={12} sx={{ mt: 3 }}>
-//                     <Button
-//                       color="primary"
-//                       variant="contained"
-//                       fullWidth
-//                       type="submit"
-//                       disabled={isSubmitting}
-//                       sx={{ py: 1.5 }}
-//                     >
-//                       {isSubmitting ? <CircularProgress size={24} /> : 'Submit'}
-//                     </Button>
-//                   </Grid>
-//                   <Grid item xs={12} sx={{ textAlign: 'center' }}>
-//                     <Button 
-//                       color="primary" 
-//                       variant="text" 
-//                       onClick={() => navigate('/login')}
-//                     >
-//                       Already registered? Login
-//                     </Button>
-//                   </Grid>
-//                 </Grid>
-//               </form>
-//             </>
-//           ) : (
-//             <Box sx={{ textAlign: 'center', py: 4 }} className="success-message">
-//               <Typography variant="h4" component="h2" color="primary" gutterBottom>
-//                 Registration Successful!
-//               </Typography>
-//               <Typography variant="body1" paragraph>
-//                 Thank you for registering as a rider. Your application has been submitted successfully.
-//               </Typography>
-//               <Button 
-//                 variant="contained" 
-//                 color="primary" 
-//                 onClick={() => navigate('/login')}
-//                 sx={{ mt: 2 }}
-//               >
-//                 Login to Your Account
-//               </Button>
-//             </Box>
-//           )}
-//         </Paper>
-//       </Container>
-//     </Box>
-//   );
-// };
-
-// export default BecomeRiderPage;
-
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -291,7 +20,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Custom styled TextField with icon
 const IconTextField = ({ icon, ...props }) => (
-  <Box sx={{ position: 'relative', width: '100%' }}>
+  <Box sx={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center' }}>
     <Box sx={{ 
       position: 'absolute', 
       left: 12, 
@@ -399,6 +128,7 @@ const BecomeRiderPage = () => {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center', // Center horizontally
         overflow: 'hidden',
         position: 'relative'
       }}
@@ -447,7 +177,7 @@ const BecomeRiderPage = () => {
         }}
       />
 
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center' }}>
         <Slide direction="up" in={true} timeout={800} mountOnEnter unmountOnExit>
           <Paper 
             elevation={10} 
@@ -456,7 +186,10 @@ const BecomeRiderPage = () => {
               backgroundColor: 'rgba(255, 255, 255, 0.95)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+              width: '100%', // Ensure full width within container
+              maxWidth: '800px', // Optional: limit max width
+              mx: 'auto' // Center horizontally within container
             }}
             className="form-container"
           >
@@ -483,14 +216,14 @@ const BecomeRiderPage = () => {
                   </Box>
                 </Zoom>
                 
-                <form onSubmit={formik.handleSubmit}>
-                  <Grid container spacing={3}>
+                <form onSubmit={formik.handleSubmit} style={{ textAlign: 'center' }}>
+                  <Grid container spacing={3} justifyContent="center">
                     {/* Vehicle selection cards */}
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{ textAlign: 'center' }}>
                       <Typography variant="h6" sx={{ mb: 1, fontWeight: 500 }}>Select Your Vehicle</Typography>
-                      <Grid container spacing={2}>
+                      <Grid container spacing={2} justifyContent="center">
                         {vehicleTypes.map((vehicle, index) => (
-                          <Grid item xs={12} sm={4} key={vehicle.value}>
+                          <Grid item xs={12} sm={4} key={vehicle.value} sx={{ display: 'flex', justifyContent: 'center' }}>
                             <Grow in={true} timeout={(index + 1) * 300}>
                               <Paper
                                 component={motion.div}
@@ -505,13 +238,16 @@ const BecomeRiderPage = () => {
                                   borderRadius: '12px',
                                   border: selectedVehicle === vehicle.value ? '2px solid' : '1px solid',
                                   borderColor: selectedVehicle === vehicle.value ? 'primary.main' : 'divider',
-                                  transition: 'all 0.3s ease'
+                                  transition: 'all 0.3s ease',
+                                  width: '100%' // Take full width of grid item
                                 }}
                               >
                                 <Box sx={{ 
                                   color: selectedVehicle === vehicle.value ? 'primary.main' : 'text.secondary',
                                   fontSize: '2rem',
-                                  mb: 1
+                                  mb: 1,
+                                  display: 'flex',
+                                  justifyContent: 'center' // Center icon
                                 }}>
                                   {vehicle.icon}
                                 </Box>
@@ -527,7 +263,7 @@ const BecomeRiderPage = () => {
                         ))}
                       </Grid>
                       {formik.touched.vehicleType && Boolean(formik.errors.vehicleType) && (
-                        <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                        <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block', textAlign: 'center' }}>
                           {formik.errors.vehicleType}
                         </Typography>
                       )}
@@ -536,12 +272,12 @@ const BecomeRiderPage = () => {
                     {/* Personal Information Section */}
                     <Grid item xs={12}>
                       <Fade in={true} timeout={1000}>
-                        <Box>
+                        <Box sx={{ textAlign: 'center' }}>
                           <Typography variant="h6" sx={{ mt: 2, mb: 2, fontWeight: 500 }}>
                             Personal Information
                           </Typography>
-                          <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
+                          <Grid container spacing={3} justifyContent="center">
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="name"
                                 name="name"
@@ -554,7 +290,7 @@ const BecomeRiderPage = () => {
                                 variant="outlined"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="phone"
                                 name="phone"
@@ -567,7 +303,7 @@ const BecomeRiderPage = () => {
                                 variant="outlined"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="location"
                                 name="location"
@@ -580,7 +316,7 @@ const BecomeRiderPage = () => {
                                 variant="outlined"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="vehicleNumber"
                                 name="vehicleNumber"
@@ -601,12 +337,12 @@ const BecomeRiderPage = () => {
                     {/* Account Information Section */}
                     <Grid item xs={12}>
                       <Fade in={true} timeout={1500}>
-                        <Box>
+                        <Box sx={{ textAlign: 'center' }}>
                           <Typography variant="h6" sx={{ mt: 2, mb: 2, fontWeight: 500 }}>
                             Account Information
                           </Typography>
-                          <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
+                          <Grid container spacing={3} justifyContent="center">
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="email"
                                 name="email"
@@ -619,7 +355,7 @@ const BecomeRiderPage = () => {
                                 variant="outlined"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="password"
                                 name="password"
@@ -633,7 +369,7 @@ const BecomeRiderPage = () => {
                                 variant="outlined"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: 'center' }}>
                               <IconTextField
                                 id="confirmPassword"
                                 name="confirmPassword"
@@ -652,9 +388,9 @@ const BecomeRiderPage = () => {
                       </Fade>
                     </Grid>
 
-                    <Grid item xs={12} sx={{ mt: 2 }}>
+                    <Grid item xs={12} sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
                       <Fade in={true} timeout={2000}>
-                        <Box>
+                        <Box sx={{ width: '100%', maxWidth: '400px', mx: 'auto' }}>
                           <Button
                             component={motion.button}
                             whileHover={{ scale: 1.03 }}
