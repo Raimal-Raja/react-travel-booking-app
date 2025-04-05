@@ -63,7 +63,7 @@ const HomePage = () => {
   };
 
   const handleBecomeRider = () => {
-    navigate('/become-rider');
+    navigate('./become-rider');
   };
 
   return (
