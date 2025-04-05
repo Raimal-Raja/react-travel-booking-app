@@ -1,396 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import { 
-//   Container, 
-//   Grid, 
-//   Typography, 
-//   Box, 
-//   Card, 
-//   CardContent, 
-//   Table, 
-//   TableBody, 
-//   TableCell, 
-//   TableContainer, 
-//   TableHead, 
-//   TableRow, 
-//   Paper, 
-//   Button, 
-//   Switch, 
-//   FormControlLabel,
-//   CircularProgress,
-//   Tabs,
-//   Tab,
-//   Chip
-// } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
 
-// const RiderDashboard = () => {
-//   const navigate = useNavigate();
-//   const [loading, setLoading] = useState(false);
-//   const [tabValue, setTabValue] = useState(0);
-//   const [isAvailable, setIsAvailable] = useState(true);
-//   const [currentOrders, setCurrentOrders] = useState([]);
-//   const [orderHistory, setOrderHistory] = useState([]);
-  
-//   // Simulate fetching rider information from localStorage
-//   const rider = JSON.parse(localStorage.getItem('rider')) || {
-//     name: 'Abdul Rehman',
-//     phone: '03001234567',
-//     area: 'Central Badin',
-//     vehicleType: 'Auto Rickshaw',
-//     vehicleNumber: 'BDN-1234',
-//     email: 'abdul@example.com'
-//   };
 
-//   // Simulate fetching orders data
-//   useEffect(() => {
-//     setLoading(true);
-//     // Simulate API call with setTimeout
-//     setTimeout(() => {
-//       // Mock data for current orders
-//       const mockCurrentOrders = [
-//         {
-//           id: 'ORD-001',
-//           customerName: 'Nasir Ali',
-//           customerPhone: '03451234567',
-//           pickupLocation: 'Main Market, Badin',
-//           destination: 'Railway Station, Badin',
-//           status: 'In Progress',
-//           timestamp: new Date().toISOString()
-//         },
-//         {
-//           id: 'ORD-002',
-//           customerName: 'Farhan Khan',
-//           customerPhone: '03329876543',
-//           pickupLocation: 'College Road, Badin',
-//           destination: 'Bus Terminal, Badin',
-//           status: 'Pending',
-//           timestamp: new Date().toISOString()
-//         }
-//       ];
-      
-//       // Mock data for order history
-//       const mockOrderHistory = [
-//         {
-//           id: 'ORD-987',
-//           customerName: 'Imran Ahmed',
-//           customerPhone: '03219876543',
-//           pickupLocation: 'Hospital Road, Badin',
-//           destination: 'Main Market, Badin',
-//           status: 'Completed',
-//           timestamp: new Date(Date.now() - 86400000).toISOString() // Yesterday
-//         },
-//         {
-//           id: 'ORD-876',
-//           customerName: 'Saima Khan',
-//           customerPhone: '03001122334',
-//           pickupLocation: 'Residential Area, Badin',
-//           destination: 'City Center, Badin',
-//           status: 'Completed',
-//           timestamp: new Date(Date.now() - 172800000).toISOString() // Day before yesterday
-//         },
-//         {
-//           id: 'ORD-765',
-//           customerName: 'Zubair Hassan',
-//           customerPhone: '03137654321',
-//           pickupLocation: 'Bus Terminal, Badin',
-//           destination: 'College Road, Badin',
-//           status: 'Cancelled',
-//           timestamp: new Date(Date.now() - 259200000).toISOString() // 3 days ago
-//         }
-//       ];
-      
-//       setCurrentOrders(mockCurrentOrders);
-//       setOrderHistory(mockOrderHistory);
-//       setLoading(false);
-//     }, 1500);
-//   }, []);
 
-//   const handleTabChange = (event, newValue) => {
-//     setTabValue(newValue);
-//   };
 
-//   const handleAvailabilityChange = (event) => {
-//     setIsAvailable(event.target.checked);
-//     // Here you would typically update the rider's availability status on your server
-//   };
-
-//   const handleMarkCompleted = (orderId) => {
-//     setLoading(true);
-//     // Simulate API call to update order status
-//     setTimeout(() => {
-//       const updatedCurrentOrders = currentOrders.filter(order => order.id !== orderId);
-//       const completedOrder = currentOrders.find(order => order.id === orderId);
-      
-//       if (completedOrder) {
-//         completedOrder.status = 'Completed';
-//         completedOrder.timestamp = new Date().toISOString();
-//         setOrderHistory([completedOrder, ...orderHistory]);
-//       }
-      
-//       setCurrentOrders(updatedCurrentOrders);
-//       setLoading(false);
-//     }, 1000);
-//   };
-
-//   const handleCancelOrder = (orderId) => {
-//     setLoading(true);
-//     // Simulate API call to cancel order
-//     setTimeout(() => {
-//       const updatedCurrentOrders = currentOrders.filter(order => order.id !== orderId);
-//       const cancelledOrder = currentOrders.find(order => order.id === orderId);
-      
-//       if (cancelledOrder) {
-//         cancelledOrder.status = 'Cancelled';
-//         cancelledOrder.timestamp = new Date().toISOString();
-//         setOrderHistory([cancelledOrder, ...orderHistory]);
-//       }
-      
-//       setCurrentOrders(updatedCurrentOrders);
-//       setLoading(false);
-//     }, 1000);
-//   };
-
-//   const formatDate = (dateString) => {
-//     const options = { 
-//       year: 'numeric', 
-//       month: 'short', 
-//       day: 'numeric',
-//       hour: '2-digit',
-//       minute: '2-digit'
-//     };
-//     return new Date(dateString).toLocaleDateString('en-US', options);
-//   };
-
-//   if (!localStorage.getItem('rider')) {
-//     // If no rider is logged in, redirect to login page
-//     // In a real app, you would check authentication status
-//     useEffect(() => {
-//       navigate('/login');
-//     }, [navigate]);
-//     return null;
-//   }
-
-//   return (
-//     <Box sx={{ pt: 10, pb: 5 }}>
-//       <Container>
-//         <Grid container spacing={4}>
-//           <Grid item xs={12}>
-//             <Typography variant="h4" component="h1" gutterBottom>
-//               Rider Dashboard
-//             </Typography>
-//           </Grid>
-          
-//           {/* Rider Info Card */}
-//           <Grid item xs={12} md={4}>
-//             <Card sx={{ height: '100%' }}>
-//               <CardContent>
-//                 <Typography variant="h6" component="h2" gutterBottom>
-//                   Rider Information
-//                 </Typography>
-//                 <Box sx={{ mb: 2 }}>
-//                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Name:</Typography>
-//                   <Typography variant="body1">{rider.name}</Typography>
-//                 </Box>
-//                 <Box sx={{ mb: 2 }}>
-//                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Phone:</Typography>
-//                   <Typography variant="body1">{rider.phone}</Typography>
-//                 </Box>
-//                 <Box sx={{ mb: 2 }}>
-//                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Area:</Typography>
-//                   <Typography variant="body1">{rider.area}</Typography>
-//                 </Box>
-//                 <Box sx={{ mb: 2 }}>
-//                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Vehicle Type:</Typography>
-//                   <Typography variant="body1">{rider.vehicleType}</Typography>
-//                 </Box>
-//                 <Box sx={{ mb: 2 }}>
-//                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Vehicle Number:</Typography>
-//                   <Typography variant="body1">{rider.vehicleNumber}</Typography>
-//                 </Box>
-//                 <Box sx={{ mb: 3 }}>
-//                   <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Email:</Typography>
-//                   <Typography variant="body1">{rider.email}</Typography>
-//                 </Box>
-                
-//                 <FormControlLabel
-//                   control={
-//                     <Switch
-//                       checked={isAvailable}
-//                       onChange={handleAvailabilityChange}
-//                       color="primary"
-//                     />
-//                   }
-//                   label={isAvailable ? "Available for Rides" : "Unavailable"}
-//                 />
-                
-//                 <Box sx={{ mt: 2 }}>
-//                   <Button 
-//                     variant="outlined" 
-//                     color="error" 
-//                     fullWidth
-//                     onClick={() => {
-//                       localStorage.removeItem('rider');
-//                       navigate('/login');
-//                     }}
-//                   >
-//                     Logout
-//                   </Button>
-//                 </Box>
-//               </CardContent>
-//             </Card>
-//           </Grid>
-          
-//           {/* Orders Section */}
-//           <Grid item xs={12} md={8}>
-//             <Card>
-//               <CardContent>
-//                 <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 3 }}>
-//                   <Tab label="Current Orders" />
-//                   <Tab label="Order History" />
-//                 </Tabs>
-                
-//                 {loading ? (
-//                   <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
-//                     <CircularProgress />
-//                   </Box>
-//                 ) : (
-//                   <div>
-//                     {/* Current Orders Tab */}
-//                     {tabValue === 0 && (
-//                       <div>
-//                         {currentOrders.length === 0 ? (
-//                           <Typography variant="body1" sx={{ textAlign: 'center', p: 3 }}>
-//                             No current orders. Make sure you are available for rides.
-//                           </Typography>
-//                         ) : (
-//                           <TableContainer component={Paper}>
-//                             <Table>
-//                               <TableHead>
-//                                 <TableRow>
-//                                   <TableCell>Order ID</TableCell>
-//                                   <TableCell>Customer</TableCell>
-//                                   <TableCell>Pickup</TableCell>
-//                                   <TableCell>Destination</TableCell>
-//                                   <TableCell>Status</TableCell>
-//                                   <TableCell>Actions</TableCell>
-//                                 </TableRow>
-//                               </TableHead>
-//                               <TableBody>
-//                                 {currentOrders.map((order) => (
-//                                   <TableRow key={order.id}>
-//                                     <TableCell>{order.id}</TableCell>
-//                                     <TableCell>
-//                                       {order.customerName}<br/>
-//                                       <Typography variant="body2" color="text.secondary">
-//                                         {order.customerPhone}
-//                                       </Typography>
-//                                     </TableCell>
-//                                     <TableCell>{order.pickupLocation}</TableCell>
-//                                     <TableCell>{order.destination}</TableCell>
-//                                     <TableCell>
-//                                       <Chip 
-//                                         label={order.status} 
-//                                         color={order.status === 'In Progress' ? 'primary' : 'warning'} 
-//                                         size="small" 
-//                                       />
-//                                     </TableCell>
-//                                     <TableCell>
-//                                       <Button 
-//                                         variant="contained" 
-//                                         color="success" 
-//                                         size="small" 
-//                                         onClick={() => handleMarkCompleted(order.id)}
-//                                         sx={{ mr: 1, mb: { xs: 1, sm: 0 } }}
-//                                       >
-//                                         Complete
-//                                       </Button>
-//                                       <Button 
-//                                         variant="outlined" 
-//                                         color="error" 
-//                                         size="small" 
-//                                         onClick={() => handleCancelOrder(order.id)}
-//                                       >
-//                                         Cancel
-//                                       </Button>
-//                                     </TableCell>
-//                                   </TableRow>
-//                                 ))}
-//                               </TableBody>
-//                             </Table>
-//                           </TableContainer>
-//                         )}
-//                       </div>
-//                     )}
-                    
-//                     {/* Order History Tab */}
-//                     {tabValue === 1 && (
-//                       <div>
-//                         {orderHistory.length === 0 ? (
-//                           <Typography variant="body1" sx={{ textAlign: 'center', p: 3 }}>
-//                             No order history available.
-//                           </Typography>
-//                         ) : (
-//                           <TableContainer component={Paper}>
-//                             <Table>
-//                               <TableHead>
-//                                 <TableRow>
-//                                   <TableCell>Order ID</TableCell>
-//                                   <TableCell>Customer</TableCell>
-//                                   <TableCell>Route</TableCell>
-//                                   <TableCell>Status</TableCell>
-//                                   <TableCell>Date</TableCell>
-//                                 </TableRow>
-//                               </TableHead>
-//                               <TableBody>
-//                                 {orderHistory.map((order) => (
-//                                   <TableRow key={order.id}>
-//                                     <TableCell>{order.id}</TableCell>
-//                                     <TableCell>
-//                                       {order.customerName}<br/>
-//                                       <Typography variant="body2" color="text.secondary">
-//                                         {order.customerPhone}
-//                                       </Typography>
-//                                     </TableCell>
-//                                     <TableCell>
-//                                       <Typography variant="body2">
-//                                         From: {order.pickupLocation}
-//                                       </Typography>
-//                                       <Typography variant="body2">
-//                                         To: {order.destination}
-//                                       </Typography>
-//                                     </TableCell>
-//                                     <TableCell>
-//                                       <Chip 
-//                                         label={order.status} 
-//                                         color={
-//                                           order.status === 'Completed' ? 'success' : 
-//                                           order.status === 'Cancelled' ? 'error' : 'default'
-//                                         } 
-//                                         size="small" 
-//                                       />
-//                                     </TableCell>
-//                                     <TableCell>{formatDate(order.timestamp)}</TableCell>
-//                                   </TableRow>
-//                                 ))}
-//                               </TableBody>
-//                             </Table>
-//                           </TableContainer>
-//                         )}
-//                       </div>
-//                     )}
-//                   </div>
-//                 )}
-//               </CardContent>
-//             </Card>
-//           </Grid>
-//         </Grid>
-//       </Container>
-//     </Box>
-//   );
-// };
-
-// export default RiderDashboard;
 
 
 import React, { useState, useEffect } from 'react';
@@ -398,7 +9,8 @@ import {
   Container, Typography, Box, Grid, Button, Card, CardContent, 
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
   Paper, Switch, FormControlLabel, Tabs, Tab, Divider, CircularProgress, 
-  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle 
+  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+  Fade, Grow, Zoom
 } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -506,7 +118,7 @@ function RiderDashboard() {
   // Always call useEffect at the top level
   useEffect(() => {
     // Check if user is logged in
-    const isLoggedIn = localStorage.getItem("riderToken");
+    const isLoggedIn = localStorage.getItem("currentRider");
     
     if (!isLoggedIn) {
       navigate("/login");
@@ -553,192 +165,269 @@ function RiderDashboard() {
   };
 
   return (
-    <Box sx={{ pt: 10, pb: 6 }}>
-      <Container>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="h2" gutterBottom>
-                  Rider Profile
-                </Typography>
-                <Divider sx={{ my: 2 }} />
-                <Box sx={{ mb: 2 }}>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Name:</strong> {rider.name}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Phone:</strong> {rider.phone}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Area:</strong> {rider.area}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Vehicle:</strong> {rider.vehicle}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Vehicle Number:</strong> {rider.vehicleNumber}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Total Rides:</strong> {rider.totalRides}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    <strong>Rating:</strong> {rider.rating}/5
-                  </Typography>
-                </Box>
-                <Divider sx={{ my: 2 }} />
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={status}
-                      onChange={handleStatusChange}
-                      color="primary"
-                    />
+    <Box sx={{ 
+      pt: 10, 
+      pb: 6, 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center' 
+    }}>
+      <Container maxWidth="lg">
+        <Fade in={true} timeout={800}>
+          <Grid container spacing={4} justifyContent="center">
+            <Grid item xs={12} md={4}>
+              <Zoom in={true} style={{ transitionDelay: '150ms' }}>
+                <Card sx={{ 
+                  height: '100%', 
+                  transition: 'all 0.3s ease',
+                  '&:hover': { 
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)'
                   }
-                  label={status ? "Available" : "Unavailable"}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} md={8}>
-            <Card>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={tabValue} onChange={handleTabChange} centered>
-                  <Tab label="Current Orders" />
-                  <Tab label="Order History" />
-                </Tabs>
-              </Box>
-              
-              {tabValue === 0 && (
-                <Box sx={{ p: 3 }}>
-                  <Typography variant="h6" gutterBottom>
-                    Current Orders
-                  </Typography>
-                  
-                  {loading ? (
-                    <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
-                      <CircularProgress />
-                    </Box>
-                  ) : orders.length === 0 ? (
-                    <Typography variant="body1" sx={{ py: 2, textAlign: 'center' }}>
-                      No current orders available.
+                }}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2" gutterBottom align="center">
+                      Rider Profile
                     </Typography>
-                  ) : (
-                    <TableContainer component={Paper} sx={{ mt: 2 }}>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Customer</TableCell>
-                            <TableCell>Pick-up Location</TableCell>
-                            <TableCell>Destination</TableCell>
-                            <TableCell>Fare (Rs)</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Action</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {orders.map((order) => (
-                            <TableRow key={order.id}>
-                              <TableCell>
-                                {order.customerName}
-                                <Typography variant="caption" component="div">
-                                  {order.customerPhone}
-                                </Typography>
-                              </TableCell>
-                              <TableCell>{order.pickup}</TableCell>
-                              <TableCell>{order.destination}</TableCell>
-                              <TableCell>{order.fare}</TableCell>
-                              <TableCell>{order.date}</TableCell>
-                              <TableCell>
-                                <Button 
-                                  variant="contained" 
-                                  size="small"
-                                  onClick={() => handleCompleteOrder(order.id)}
-                                >
-                                  Complete
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  )}
-                </Box>
-              )}
-              
-              {tabValue === 1 && (
-                <Box sx={{ p: 3 }}>
-                  <Typography variant="h6" gutterBottom>
-                    Order History
-                  </Typography>
-                  
-                  {loading ? (
-                    <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
-                      <CircularProgress />
+                    <Divider sx={{ my: 2 }} />
+                    <Box sx={{ mb: 2, textAlign: 'center' }}>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Name:</strong> {rider.name}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Phone:</strong> {rider.phone}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Area:</strong> {rider.area}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Vehicle:</strong> {rider.vehicle}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Vehicle Number:</strong> {rider.vehicleNumber}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Total Rides:</strong> {rider.totalRides}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom>
+                        <strong>Rating:</strong> {rider.rating}/5
+                      </Typography>
                     </Box>
-                  ) : history.length === 0 ? (
-                    <Typography variant="body1" sx={{ py: 2, textAlign: 'center' }}>
-                      No order history available.
-                    </Typography>
-                  ) : (
-                    <TableContainer component={Paper} sx={{ mt: 2 }}>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Customer</TableCell>
-                            <TableCell>Pick-up Location</TableCell>
-                            <TableCell>Destination</TableCell>
-                            <TableCell>Fare (Rs)</TableCell>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Status</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {history.map((order) => (
-                            <TableRow key={order.id}>
-                              <TableCell>
-                                {order.customerName}
-                                <Typography variant="caption" component="div">
-                                  {order.customerPhone}
-                                </Typography>
-                              </TableCell>
-                              <TableCell>{order.pickup}</TableCell>
-                              <TableCell>{order.destination}</TableCell>
-                              <TableCell>{order.fare}</TableCell>
-                              <TableCell>{order.date}</TableCell>
-                              <TableCell>
-                                <Box
-                                  sx={{
-                                    bgcolor: 'success.main',
-                                    color: 'white',
-                                    py: 0.5,
-                                    px: 1,
-                                    borderRadius: 1,
-                                    display: 'inline-block',
-                                    fontSize: '0.75rem',
-                                  }}
-                                >
-                                  Completed
-                                </Box>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
+                    <Divider sx={{ my: 2 }} />
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={status}
+                            onChange={handleStatusChange}
+                            color="primary"
+                          />
+                        }
+                        label={status ? "Available" : "Unavailable"}
+                      />
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Zoom>
+            </Grid>
+            
+            <Grid item xs={12} md={8}>
+              <Zoom in={true} style={{ transitionDelay: '300ms' }}>
+                <Card sx={{ 
+                  transition: 'all 0.3s ease',
+                  '&:hover': { 
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)'
+                  }
+                }}>
+                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs 
+                      value={tabValue} 
+                      onChange={handleTabChange} 
+                      centered 
+                      sx={{
+                        '& .MuiTab-root': {
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.04)'
+                          }
+                        }
+                      }}
+                    >
+                      <Tab label="Current Orders" />
+                      <Tab label="Order History" />
+                    </Tabs>
+                  </Box>
+                  
+                  {tabValue === 0 && (
+                    <Fade in={true} timeout={500}>
+                      <Box sx={{ p: 3 }}>
+                        <Typography variant="h6" gutterBottom align="center">
+                          Current Orders
+                        </Typography>
+                        
+                        {loading ? (
+                          <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
+                            <CircularProgress />
+                          </Box>
+                        ) : orders.length === 0 ? (
+                          <Typography variant="body1" sx={{ py: 2, textAlign: 'center' }}>
+                            No current orders available.
+                          </Typography>
+                        ) : (
+                          <Grow in={true} timeout={600}>
+                            <TableContainer component={Paper} sx={{ mt: 2 }}>
+                              <Table>
+                                <TableHead>
+                                  <TableRow sx={{ backgroundColor: 'rgba(0, 0, 0, 0.04)' }}>
+                                    <TableCell align="center">Customer</TableCell>
+                                    <TableCell align="center">Pick-up Location</TableCell>
+                                    <TableCell align="center">Destination</TableCell>
+                                    <TableCell align="center">Fare (Rs)</TableCell>
+                                    <TableCell align="center">Date</TableCell>
+                                    <TableCell align="center">Action</TableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {orders.map((order, index) => (
+                                    <TableRow 
+                                      key={order.id} 
+                                      sx={{ 
+                                        transition: 'all 0.2s ease',
+                                        '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }
+                                      }}
+                                    >
+                                      <TableCell align="center">
+                                        {order.customerName}
+                                        <Typography variant="caption" component="div" align="center">
+                                          {order.customerPhone}
+                                        </Typography>
+                                      </TableCell>
+                                      <TableCell align="center">{order.pickup}</TableCell>
+                                      <TableCell align="center">{order.destination}</TableCell>
+                                      <TableCell align="center">{order.fare}</TableCell>
+                                      <TableCell align="center">{order.date}</TableCell>
+                                      <TableCell align="center">
+                                        <Button 
+                                          variant="contained" 
+                                          size="small"
+                                          onClick={() => handleCompleteOrder(order.id)}
+                                          sx={{
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                              transform: 'translateY(-2px)',
+                                              boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+                                            }
+                                          }}
+                                        >
+                                          Complete
+                                        </Button>
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Grow>
+                        )}
+                      </Box>
+                    </Fade>
                   )}
-                </Box>
-              )}
-            </Card>
+                  
+                  {tabValue === 1 && (
+                    <Fade in={true} timeout={500}>
+                      <Box sx={{ p: 3 }}>
+                        <Typography variant="h6" gutterBottom align="center">
+                          Order History
+                        </Typography>
+                        
+                        {loading ? (
+                          <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
+                            <CircularProgress />
+                          </Box>
+                        ) : history.length === 0 ? (
+                          <Typography variant="body1" sx={{ py: 2, textAlign: 'center' }}>
+                            No order history available.
+                          </Typography>
+                        ) : (
+                          <Grow in={true} timeout={600}>
+                            <TableContainer component={Paper} sx={{ mt: 2 }}>
+                              <Table>
+                                <TableHead>
+                                  <TableRow sx={{ backgroundColor: 'rgba(0, 0, 0, 0.04)' }}>
+                                    <TableCell align="center">Customer</TableCell>
+                                    <TableCell align="center">Pick-up Location</TableCell>
+                                    <TableCell align="center">Destination</TableCell>
+                                    <TableCell align="center">Fare (Rs)</TableCell>
+                                    <TableCell align="center">Date</TableCell>
+                                    <TableCell align="center">Status</TableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {history.map((order, index) => (
+                                    <TableRow 
+                                      key={order.id}
+                                      sx={{ 
+                                        transition: 'all 0.2s ease',
+                                        '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' }
+                                      }}
+                                    >
+                                      <TableCell align="center">
+                                        {order.customerName}
+                                        <Typography variant="caption" component="div" align="center">
+                                          {order.customerPhone}
+                                        </Typography>
+                                      </TableCell>
+                                      <TableCell align="center">{order.pickup}</TableCell>
+                                      <TableCell align="center">{order.destination}</TableCell>
+                                      <TableCell align="center">{order.fare}</TableCell>
+                                      <TableCell align="center">{order.date}</TableCell>
+                                      <TableCell align="center">
+                                        <Box
+                                          sx={{
+                                            bgcolor: 'success.main',
+                                            color: 'white',
+                                            py: 0.5,
+                                            px: 1,
+                                            borderRadius: 1,
+                                            display: 'inline-block',
+                                            fontSize: '0.75rem',
+                                            transition: 'all 0.3s ease',
+                                            '&:hover': {
+                                              bgcolor: 'success.dark',
+                                              transform: 'scale(1.05)'
+                                            }
+                                          }}
+                                        >
+                                          Completed
+                                        </Box>
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Grow>
+                        )}
+                      </Box>
+                    </Fade>
+                  )}
+                </Card>
+              </Zoom>
+            </Grid>
           </Grid>
-        </Grid>
+        </Fade>
       </Container>
       
       <Dialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}
+        TransitionComponent={Zoom}
+        PaperProps={{
+          sx: {
+            borderRadius: 2,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
+          }
+        }}
       >
         <DialogTitle>Complete Order</DialogTitle>
         <DialogContent>
@@ -747,8 +436,27 @@ function RiderDashboard() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-          <Button onClick={confirmCompleteOrder} variant="contained" color="primary">
+          <Button 
+            onClick={() => setOpenDialog(false)}
+            sx={{
+              transition: 'all 0.3s ease',
+              '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.08)' }
+            }}
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={confirmCompleteOrder} 
+            variant="contained" 
+            color="primary"
+            sx={{
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: '0 4px 8px rgba(0,0,0,0.2)'
+              }
+            }}
+          >
             Complete
           </Button>
         </DialogActions>
