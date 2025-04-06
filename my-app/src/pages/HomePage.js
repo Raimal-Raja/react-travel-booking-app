@@ -542,10 +542,10 @@ const HomePage = () => {
               >
                 <Box 
                   component="img" 
-                  src="/images/mobileapp.jpg" 
+                  src="https://pngimg.com/d/qr_code_PNG33.png" 
                   alt="Mobile App" 
                   sx={{ 
-                    width: '80%', 
+                    width: '20%', 
                     mx: 'auto',
                     borderRadius: '15px',
                     boxShadow: '0 20px 40px rgba(0,0,0,0.2)'

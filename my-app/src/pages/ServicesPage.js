@@ -58,6 +58,8 @@ const ServicesPage = () => {
       once: false,
       mirror: true
     });
+
+    
     
     // Get user's current location
     if (navigator.geolocation) {
@@ -106,42 +108,42 @@ const ServicesPage = () => {
     {
       title: "City Rides",
       description: "Reliable transportation within the city for your daily commute or short errands. Our drivers are professional and know every corner of Badin.",
-      image: "/images/city-ride.jpg",
+      image: "https://bykea.com/wp-content/uploads/2020/02/Updated-1.jpg",
       icon: "🏙️",
       position: { lat: 24.6558, lng: 68.8383 }
     },
     {
       title: "Out of Town",
       description: "Long-distance rides for trips to neighboring cities with experienced drivers. Enjoy the journey with comfort and safety.",
-      image: "/images/outstation.jpg",
+      image: "https://bykea.com/wp-content/uploads/2020/02/Updated-2.jpg",
       icon: "🚗",
       position: { lat: 24.6658, lng: 68.8483 }
     },
     {
       title: "Bike Rides",
       description: "Quick and affordable bike rides to navigate through traffic easily. Perfect for solo travelers and short distances.",
-      image: "/images/bike-ride.jpg",
+      image: "https://bykea.com/wp-content/uploads/2020/03/zubair-a-1.jpg",
       icon: "🏍️",
       position: { lat: 24.6458, lng: 68.8283 }
     },
     {
       title: "Auto Rickshaw",
       description: "Traditional and economical way to travel around the city. Experience the local culture with our friendly rickshaw drivers.",
-      image: "/images/auto-rickshaw.jpg",
+      image: "https://bykea.com/wp-content/uploads/2024/09/rickshaw.png",
       icon: "🛺",
       position: { lat: 24.6498, lng: 68.8343 }
     },
     {
       title: "Rental Services",
       description: "Rent vehicles for hours or days for your specific needs. Choose from our wide range of cars, bikes, and more.",
-      image: "/images/rental.jpg",
+      image: "https://media.istockphoto.com/id/1419724017/photo/car-rental-agency-employee-giving-car-keys-to-beautiful-young-woman.jpg?s=612x612&w=0&k=20&c=fmJXUDhx3AGaQoa_pr3bLqliyhX6yKD3WFXPkLbSDyw=",
       icon: "🔑",
       position: { lat: 24.6528, lng: 68.8373 }
     },
     {
       title: "Package Delivery",
       description: "Fast and secure package delivery within Badin. Trust us with your important deliveries and documents.",
-      image: "/images/package.jpg",
+      image: "https://bykea.com/wp-content/uploads/2020/03/sundus-s.jpg",
       icon: "📦",
       position: { lat: 24.6578, lng: 68.8403 }
     }
@@ -194,7 +196,8 @@ const ServicesPage = () => {
       opacity: 1, 
       transition: { 
         staggerChildren: 0.1,
-        delayChildren: 0.3
+        delayChildren: 0.3,
+        
       } 
     }
   };
@@ -209,7 +212,7 @@ const ServicesPage = () => {
   };
 
   return (
-    <Box sx={{ pt: 10, overflow: 'hidden' }}>
+    <Box sx={{ pt: -12, overflow: 'hidden' }}>
       <Box 
         component={motion.div}
         initial={{ opacity: 0, y: -50 }}
@@ -218,11 +221,12 @@ const ServicesPage = () => {
         sx={{ 
           bgcolor: 'primary.main', 
           color: 'white', 
-          py: 10,
+          py: 15,
           position: 'relative',
           backgroundImage: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%), url("/images/hero-bg.jpg")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          
         }}
       >
         <Container>
@@ -249,7 +253,7 @@ const ServicesPage = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             sx={{ 
               textAlign: 'center', 
-              maxWidth: 800, 
+              maxWidth: 1000, 
               mx: 'auto',
               mb: 4
             }}
@@ -258,6 +262,8 @@ const ServicesPage = () => {
             Experience convenience, reliability, and comfort with our premium services.
           </Typography>
           <Box 
+
+          
             component={motion.div}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -266,7 +272,9 @@ const ServicesPage = () => {
               display: 'flex', 
               justifyContent: 'center',
               gap: 2,
-              flexWrap: 'wrap'
+              flexWrap: 'wrap',
+              
+              
             }}
           >
             <Button 
@@ -475,6 +483,7 @@ const ServicesPage = () => {
                         borderRadius: 4,
                         paddingLeft: "100px",
                         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        background: 'linear-gradient(135deg, #0a3d62 0%, #38ada9 100%)',
                         '&:hover': {
                           transform: 'translateY(-5px)',
                           boxShadow: theme.shadows[10]

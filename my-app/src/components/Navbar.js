@@ -126,7 +126,7 @@ const Navbar = () => {
                     height: '2px',
                     bottom: -2,
                     left: 0,
-                    backgroundColor: 'white',
+                    backgroundColor: 'blue',
                     transition: 'width 0.3s ease',
                   },
                   '&:hover::after': {
