@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { 
   Container, Typography, Box, Grid, Button, Card, CardContent, 
@@ -13,8 +7,7 @@ import {
   Fade, Grow, Zoom
 } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 function RiderDashboard() {

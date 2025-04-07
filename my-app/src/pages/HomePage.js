@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-import { Container, Grid, Typography, Button, Box, Card, CardContent, Paper } from '@mui/material';
+import { Container, Grid, Typography, Button, Box, Card, CardContent} from '@mui/material';
 import ShieldIcon from '@mui/icons-material/Shield';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';

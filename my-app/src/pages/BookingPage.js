@@ -110,6 +110,7 @@ const BookingPage = () => {
         pb: 6,
         // backgroundImage: 'url(/images/booking-background.jpg)', // Keep original background
         background: 'linear-gradient(135deg, #0a3d62 0%, #38ada9 100%)',
+
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',

@@ -28,7 +28,6 @@ import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
@@ -47,7 +46,7 @@ const ServicesPage = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
   
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded} = useLoadScript({
     googleMapsApiKey: `https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places&callback=initMap`,
     libraries: ["places", "directions"]
   });
